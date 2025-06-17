@@ -1,10 +1,22 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import ReactDOM from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import App from "./App";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider } from "./context/ThemeContext";
+import { BrowserRouter } from "react-router-dom";
+
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+    <BrowserRouter>
+        <ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+                <App />
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+        </ThemeProvider>
+    </BrowserRouter>
+);

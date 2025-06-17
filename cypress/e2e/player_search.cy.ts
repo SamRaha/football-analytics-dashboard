@@ -1,6 +1,6 @@
 // describe("Product lookup flow", () => {
 //     beforeEach(() => {
-//         cy.intercept("GET", "/input-data.json", { fixture: "products.json" }).as("getProducts");
+//         cy.intercept("GET", "/input-data.json", { fixture: "players-data.json" }).as("getProducts");
 //         cy.visit("/");
 //     });
 

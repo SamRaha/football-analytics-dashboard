@@ -2,6 +2,7 @@ html,
 body,
 #root,
 #app {
+    font-family: "Montserrat", sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -9,5 +10,13 @@ body,
 
 #app {
     max-width: 1248px;
-    padding: 0 24px !important;
+}
+
+#main {
+    padding: 24px !important;
+}
+
+button {
+    border: none !important;
+    padding: 9px 12px !important;
 }
