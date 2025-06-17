@@ -1,0 +1,122 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "MVP infrastructure: S3 raw data, Lambda API, React static site"
+
+Parameters:
+    RawDataBucketName:
+        Type: String
+        Default: football-mvp-raw-data
+    WebsiteBucketName:
+        Type: String
+        Default: football-mvp-website
+
+Resources:
+    # S3 bucket for raw JSON data
+    RawDataBucket:
+        Type: AWS::S3::Bucket
+        Properties:
+            BucketName: !Ref RawDataBucketName
+            VersioningConfiguration:
+                Status: Enabled
+
+    # Static website hosting
+    WebsiteBucket:
+        Type: AWS::S3::Bucket
+        Properties:
+            BucketName: !Ref WebsiteBucketName
+            WebsiteConfiguration:
+                IndexDocument: index.html
+            AccessControl: PublicRead
+
+    # IAM role for Lambda with S3 read permissions
+    LambdaExecutionRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    - Effect: Allow
+                      Principal:
+                          Service: lambda.amazonaws.com
+                      Action: sts:AssumeRole
+            Path: /
+            Policies:
+                - PolicyName: LambdaS3Policy
+                  PolicyDocument:
+                      Version: "2012-10-17"
+                      Statement:
+                          - Effect: Allow
+                            Action:
+                                - logs:CreateLogGroup
+                                - logs:CreateLogStream
+                                - logs:PutLogEvents
+                            Resource: arn:aws:logs:*:*:*
+                          - Effect: Allow
+                            Action:
+                                - s3:GetObject
+                            Resource: !Sub arn:aws:s3:::${RawDataBucketName}/*
+
+    # Lambda function to retrieve player JSON from S3
+    GetPlayersFunction:
+        Type: AWS::Lambda::Function
+        Properties:
+            FunctionName: !Sub "${AWS::StackName}-get-players"
+            Handler: index.handler
+            Runtime: nodejs18.x
+            Role: !GetAtt LambdaExecutionRole.Arn
+            Code:
+                S3Bucket: your-code-bucket
+                S3Key: get-players.zip
+            Environment:
+                Variables:
+                    RAW_DATA_BUCKET: !Ref RawDataBucketName
+
+    # Permission for API Gateway to invoke the Lambda
+    LambdaApiPermission:
+        Type: AWS::Lambda::Permission
+        Properties:
+            FunctionName: !Ref GetPlayersFunction
+            Action: lambda:InvokeFunction
+            Principal: apigateway.amazonaws.com
+
+    # API Gateway REST API
+    ApiGatewayRestApi:
+        Type: AWS::ApiGateway::RestApi
+        Properties:
+            Name: !Sub "${AWS::StackName}-api"
+
+    # /players resource
+    ApiGatewayResourcePlayers:
+        Type: AWS::ApiGateway::Resource
+        Properties:
+            ParentId: !GetAtt ApiGatewayRestApi.RootResourceId
+            PathPart: players
+            RestApiId: !Ref ApiGatewayRestApi
+
+    # GET /players method
+    ApiGatewayMethodGetPlayers:
+        Type: AWS::ApiGateway::Method
+        Properties:
+            RestApiId: !Ref ApiGatewayRestApi
+            ResourceId: !Ref ApiGatewayResourcePlayers
+            HttpMethod: GET
+            AuthorizationType: NONE
+            Integration:
+                Type: AWS_PROXY
+                IntegrationHttpMethod: POST
+                Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetPlayersFunction.Arn}/invocations
+
+    # Deploy the API
+    ApiGatewayDeployment:
+        Type: AWS::ApiGateway::Deployment
+        DependsOn: ApiGatewayMethodGetPlayers
+        Properties:
+            RestApiId: !Ref ApiGatewayRestApi
+            StageName: prod
+
+Outputs:
+    ApiEndpoint:
+        Description: "API endpoint for retrieving player metrics"
+        Value: !Sub "https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/players"
+    WebsiteURL:
+        Description: "Static website URL"
+        Value: !GetAtt WebsiteBucket.WebsiteURL
