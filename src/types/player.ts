@@ -45,6 +45,13 @@ export interface Player {
     name: string;
     position: string;
     season: string;
+    age: number;
+    club: string;
+    contract_length: number; // years remaining on contract
+    salary: number; // annual salary in currency units
+    totalgoals: number;
+    totalcaps: number;
+    scout_summary: string;
     metrics: PlayerMetrics;
 }
 

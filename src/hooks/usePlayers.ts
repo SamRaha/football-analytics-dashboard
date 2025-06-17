@@ -1,4 +1,3 @@
-// src/hooks/usePlayerSearch.ts
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Fuse from "fuse.js";
@@ -7,6 +6,8 @@ import { fetchPlayers } from "../api/playerService";
 
 export const usePlayerSearch = () => {
     const [term, setTerm] = useState<string>("");
+    const [ageFilter, setAgeFilter] = useState<number | "All">("All");
+    const [clubFilter, setClubFilter] = useState<string>("All");
 
     const {
         data: players = [],
@@ -19,28 +20,45 @@ export const usePlayerSearch = () => {
         queryFn: fetchPlayers,
         staleTime: 1000 * 60 * 5,
         retry: 2,
-        enabled: term.trim() !== "",
+        // always load once, filters run in-memory
+        enabled: true,
     });
 
-    const results = useMemo<Player[]>(() => {
+    // 1) fuzzy‐search by name
+    const searched = useMemo<Player[]>(() => {
         const q = term.trim();
         if (!q) return players;
-
         const fuse = new Fuse(players, {
             keys: ["name"],
             threshold: 0.3,
             distance: 100,
         });
-
         return fuse.search(q).map((r) => r.item);
     }, [players, term]);
 
-    const hasNoMatches = !isLoading && !isError && term.trim() !== "" && results.length === 0;
+    // 2) apply age & club filters
+    const results = useMemo<Player[]>(() => {
+        return searched.filter((p) => {
+            const ageOK = ageFilter === "All" || p.age === ageFilter;
+            const clubOK = clubFilter === "All" || p.club === clubFilter;
+            return ageOK && clubOK;
+        });
+    }, [searched, ageFilter, clubFilter]);
+
+    const hasNoMatches = !isLoading && !isError && results.length === 0 && term.trim() !== "";
 
     return {
+        // inputs
         term,
         setTerm,
-        results,
+        ageFilter,
+        setAgeFilter,
+        clubFilter,
+        setClubFilter,
+
+        // data + state
+        players, // raw list (for dropdown options)
+        results, // filtered
         isLoading,
         isError,
         error: queryError?.message ?? null,

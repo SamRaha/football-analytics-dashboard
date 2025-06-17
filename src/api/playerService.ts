@@ -1,11 +1,15 @@
+// src/api/playerService.ts
+
 import { apiClient } from "./axiosConfig";
 import type { Player } from "../types/player";
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-export const fetchProducts = async (): Promise<Player[]> => {
+export const fetchPlayers = async (): Promise<Player[]> => {
     await delay(600);
 
-    const response = await apiClient.get<{ data: Player[] }>("/players-data.json");
-    return response.data.data;
+    // 1) Tell axios that the JSON endpoint returns Player[]
+    const response = await apiClient.get<Player[]>("/players-data.json");
+    // 2) response.data is now Player[], so return that
+    return response.data;
 };
