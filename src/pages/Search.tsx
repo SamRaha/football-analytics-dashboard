@@ -18,12 +18,11 @@ const Search: React.FC = () => {
 
     return (
         <div id="search">
-            <div className="header">
+            <div className="search-container">
                 <div className="content">
                     <h2 className="mb-4">Player Search</h2>
-                    <Form className="d-flex gap-2">
+                    <Form className="d-flex gap-2 search-filters">
                         <Form.Control placeholder="Search by name…" value={term} onChange={(e) => setTerm(e.target.value)} />
-
                         <Form.Select value={ageFilter} onChange={(e) => setAgeFilter(e.target.value === "All" ? "All" : +e.target.value)}>
                             <option value="All">All Ages</option>
                             {ages.map((age) => (
