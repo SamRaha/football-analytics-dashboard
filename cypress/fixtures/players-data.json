@@ -10,7 +10,8 @@
         "salary": 3000000,
         "totalgoals": 115,
         "totalcaps": 260,
-        "scout_summary": "Abraham is coming into his prime as a central striker. He combines strong physical presence with excellent positional awareness and a composed finishing touch. His hold-up play and aerial threat add depth to Roma’s attack, though he can improve his link-up play under pressure.",
+        "img": "https://sortitoutsi.b-cdn.net/uploads/face/28097985.png",
+        "scout_summary": "Abraham is coming into his prime as a central striker. He combines strong physical presence with excellent positional awareness and a composed finishing touch.",
         "metrics": {
             "attacking_creativity": {
                 "goals_per_90": 0.56,
@@ -54,7 +55,8 @@
         "salary": 1300000,
         "totalgoals": 12,
         "totalcaps": 270,
-        "scout_summary": "Moreno is a reliable left-back with excellent crossing ability and solid defensive discipline. At 31, his experience is invaluable; though his pace has slightly declined, his positioning and passing remain top-class. He contributes at both ends and adds leadership to the back-line.",
+        "img": "https://sortitoutsidospaces.b-cdn.net/media/lPkm61dAo5mHeyO5yjNng36ugj4vfGY5frA9VgLn.png",
+        "scout_summary": "Moreno is a reliable left-back with excellent crossing ability and solid defensive discipline. At 31, his experience is invaluable.",
         "metrics": {
             "attacking_creativity": {
                 "goals_per_90": 0.04,
@@ -98,7 +100,8 @@
         "salary": 600000,
         "totalgoals": 10,
         "totalcaps": 40,
-        "scout_summary": "Stroeykens is a promising attacking midfielder with vision and creative flair. His dribbling and ability to unlock defence lines make him one to watch. Physically still developing, he shows maturity beyond his years and is set to become a key playmaker.",
+        "img": "https://sortitoutsi.b-cdn.net/uploads/face/18116329.png",
+        "scout_summary": "Stroeykens is a promising attacking midfielder with vision and creative flair.",
         "metrics": {
             "attacking_creativity": {
                 "goals_per_90": 0.31,
@@ -142,7 +145,8 @@
         "salary": 500000,
         "totalgoals": 12,
         "totalcaps": 45,
-        "scout_summary": "Diarra is a dynamic central midfielder known for his industrious work-rate and range of passing. He excels at transitioning play and breaking up opposition attacks. At 21, his decision-making in the final third is still evolving, but his potential in box-to-box and deep-lying roles is clear.",
+        "img": "https://sortitoutsi.b-cdn.net/uploads/face/2000025485.png",
+        "scout_summary": "Diarra is a dynamic central midfielder known for his industrious work-rate and range of passing. He excels at transitioning play and breaking up opposition attacks.",
         "metrics": {
             "attacking_creativity": {
                 "goals_per_90": 0.14,
@@ -186,7 +190,8 @@
         "salary": 1800000,
         "totalgoals": 0,
         "totalcaps": 100,
-        "scout_summary": "Petrović is a commanding goalkeeper with sharp shot-stopping instincts and aerial authority. He reads the game well and distributes effectively from the back. Though still gaining experience at top level, his calm temperament suggests he can develop into a Premier League mainstay.",
+        "img": "https://sortitoutsi.b-cdn.net/uploads/face/62216198.png",
+        "scout_summary": "Petrović is a commanding goalkeeper with sharp shot-stopping instincts and aerial authority. He reads the game well and distributes effectively from the back.",
         "metrics": {
             "attacking_creativity": {
                 "key_passes_per_90": 0.1,

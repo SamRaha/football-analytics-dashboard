@@ -43,7 +43,6 @@ const Search: React.FC = () => {
                     </Form>
                 </div>
             </div>
-
             <Results players={results} isLoading={isLoading} hasNoMatches={hasNoMatches} />
         </div>
     );

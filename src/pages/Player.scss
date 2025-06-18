@@ -1,0 +1,135 @@
+$blue: #2138af;
+$white: #ffffff;
+$gray-light: #8d8d8d;
+$bg-dark: #343a40;
+
+.player-page {
+    background: $bg-dark;
+    color: $white;
+    padding: 24px;
+    .back-link {
+        color: $white;
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 1rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .player-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        background: transparent;
+
+        .col-image,
+        .col-stats,
+        .col-contract,
+        .col-scout {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col-image {
+            justify-content: center;
+            align-items: center;
+            flex: 0 0 200px;
+            text-align: center;
+
+            .player-image {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 0.5rem;
+            }
+
+            .player-name {
+                margin: 0;
+                color: $white;
+            }
+        }
+
+        .col-stats {
+            flex: 1;
+            border-left: 1px solid $gray-light;
+            border-right: 1px solid $gray-light;
+
+            p {
+                strong {
+                    color: $white;
+                }
+            }
+        }
+
+        .col-contract {
+            flex: 1;
+            p {
+                strong {
+                    color: $white;
+                }
+            }
+        }
+
+        .col-scout {
+            flex: 1;
+            border-left: 1px solid $gray-light;
+
+            .player-summary p {
+                color: $white;
+            }
+            p {
+                strong {
+                    color: $white;
+                }
+            }
+        }
+
+        // Mobile: single column with adjusted borders, centring & limited width
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .col-image,
+            .col-stats,
+            .col-contract,
+            .col-scout {
+                flex: 1 1 100%;
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                border: none;
+            }
+
+            .col-image .player-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .col-stats {
+                width: 75%;
+                margin: 0 auto;
+                border-top: 1px solid $gray-light;
+            }
+            .col-contract {
+                width: 75%;
+                margin: 0 auto;
+                border-top: 1px solid $gray-light;
+                border-bottom: 1px solid $gray-light;
+            }
+        }
+    }
+    .player-summary {
+        p {
+            color: $white;
+        }
+    }
+}

@@ -53,6 +53,7 @@ export interface Player {
     totalcaps: number;
     scout_summary: string;
     metrics: PlayerMetrics;
+    img: string;
 }
 
 export type Players = Player[];

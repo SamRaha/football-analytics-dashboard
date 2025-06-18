@@ -2,6 +2,7 @@
 import React from "react";
 import { Table, Spinner } from "react-bootstrap";
 import type { Player } from "../types/player";
+import { useNavigate } from "react-router-dom";
 
 export interface ResultsProps {
     players: Player[];
@@ -10,6 +11,8 @@ export interface ResultsProps {
 }
 
 const Results: React.FC<ResultsProps> = ({ players, isLoading, hasNoMatches }) => {
+    const nav = useNavigate();
+
     if (isLoading)
         return (
             <div className="content d-flex justify-content-center align-items-center m-4">
@@ -17,7 +20,7 @@ const Results: React.FC<ResultsProps> = ({ players, isLoading, hasNoMatches }) =
             </div>
         );
 
-    if (hasNoMatches) return <p className="text-center">No players match your criteria.</p>;
+    if (hasNoMatches) return <p className="text-center mt-4">No players match your criteria.</p>;
 
     return (
         <div className="content my-4">
@@ -32,7 +35,7 @@ const Results: React.FC<ResultsProps> = ({ players, isLoading, hasNoMatches }) =
                 </thead>
                 <tbody>
                     {players.map((p) => (
-                        <tr key={p.player_id}>
+                        <tr key={p.player_id} onClick={() => nav(`/player/${p.player_id}`)} style={{ cursor: "pointer" }}>
                             <td>{p.name}</td>
                             <td>{p.club}</td>
                             <td>{p.position}</td>
