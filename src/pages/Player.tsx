@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Player } from "../types/player";
 import "./Player.scss";
+import StatsTables from "../components/StatTables";
 
 const Player: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -24,11 +25,10 @@ const Player: React.FC = () => {
                 <Link to="/" className="back-link">
                     ← Back to search
                 </Link>
-
                 <div className="player-info">
                     <div className="col-image">
                         <img className="player-image" src={player.img} alt={`${player.name} profile`} onError={(e) => (e.currentTarget.src = "/images/placeholder.png")} />
-                        <h5 className="player-name">{player.name}</h5>
+                        <h5 className="player-name text-nowrap">{player.name}</h5>
                     </div>
 
                     <div className="col-stats">
@@ -60,6 +60,7 @@ const Player: React.FC = () => {
                         </div>
                     </div>
                 </div>
+                <StatsTables metrics={player.metrics} />
             </div>
         </div>
     );

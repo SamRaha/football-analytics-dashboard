@@ -11,7 +11,7 @@ const AppNavbar: React.FC = () => {
     const handleShow = () => setShow(true);
 
     return (
-        <Navbar expand="md" sticky="top" className="mb-4 navbar">
+        <Navbar expand="md" className="navbar">
             <Container fluid>
                 <Navbar.Brand as={Link} to="/">
                     <img src="https://images.ctfassets.net/phva2knh4vy5/59uDDesQq19p5lVzfe45BY/a89feaa950427ef005c9d028e925bef0/Full_colour_crest.png" alt="Leeds crest" className="navbar-logo" />

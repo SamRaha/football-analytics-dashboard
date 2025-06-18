@@ -89,7 +89,6 @@ $bg-dark: #343a40;
             }
         }
 
-        // Mobile: single column with adjusted borders, centring & limited width
         @media (max-width: 768px) {
             flex-direction: column;
             align-items: center;
