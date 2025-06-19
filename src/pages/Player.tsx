@@ -1,13 +1,23 @@
 // src/pages/Player.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Player } from "../types/player";
 import "./Player.scss";
 import StatsTables from "../components/StatTables";
 import GradientHeatMap from "../components/GradientHeatMap";
-import FootballHeatMapRecharts from "../components/FootballHeatMapRecharts";
+import TouchHeatMapRecharts from "../components/TouchHeatMapRecharts";
 import { getPlayersWithHeat } from "../utils/augmentPlayersWithHeat";
+
+function useWindowWidth() {
+    const [width, setWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    return width;
+}
 
 const Player: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -16,17 +26,21 @@ const Player: React.FC = () => {
 
     // 1. fetch raw players
     const raw = qc.getQueryData<Player[]>(["players"]) ?? [];
-
     // 2. augment with heatmap_points
-    const all = getPlayersWithHeat(raw, /*pointCount=*/ 200);
-
+    const all = getPlayersWithHeat(raw, 80);
     // 3. find the one we want
     const player = all.find((p) => p.player_id === id);
-    console.log("player: ", player);
 
     useEffect(() => {
         if (!player) navigate("/", { replace: true });
     }, [player, navigate]);
+
+    // responsive sizing
+    const windowWidth = useWindowWidth();
+    const isMobile = windowWidth < 768;
+    const baseWidth = 400;
+    const mapWidth = isMobile ? windowWidth - 48 : baseWidth;
+    const mapHeight = mapWidth / 1.6;
 
     if (!player) return null;
 
@@ -42,6 +56,7 @@ const Player: React.FC = () => {
                         <div className="col-image">
                             <img className="player-image" src={player.img} alt={`${player.name} profile`} onError={(e) => (e.currentTarget.src = "/images/placeholder.png")} />
                             <h5 className="player-name text-nowrap">{player.name}</h5>
+                            <p className="m-0 pt-2 ">{player.position}</p>
                         </div>
 
                         <div className="col-stats">
@@ -79,10 +94,17 @@ const Player: React.FC = () => {
                 <div className="stats">
                     <StatsTables metrics={player.metrics} />
 
-                    <GradientHeatMap width={800} height={500} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
+                    <div className="heatmaps">
+                        <div className="gradient-container">
+                            <h5>Pitch Thirds Occupancy (Gradient)</h5>
+                            <GradientHeatMap width={mapWidth} height={mapHeight} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
+                        </div>
 
-                    {/* now pass the player */}
-                    <FootballHeatMapRecharts width={800} height={500} player={player} />
+                        <div className="touch-container">
+                            <h5>Touch Intensity Heat Map</h5>
+                            <TouchHeatMapRecharts width={mapWidth} height={mapHeight} player={player} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

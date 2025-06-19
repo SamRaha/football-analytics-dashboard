@@ -1,3 +1,4 @@
+// src/components/StatsTables.tsx
 import React from "react";
 import { PlayerMetrics } from "../types/player";
 
@@ -7,6 +8,12 @@ interface StatsTablesProps {
 
 // Convert snake_case keys to Title Case labels
 const formatLabel = (key: string): string => key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+
+// Randomly returns 'red', 'white', or 'green'
+const getRandomColor = (): string => {
+    const colors = ["red", "white", "#02ae33 "];
+    return colors[Math.floor(Math.random() * colors.length)];
+};
 
 const StatsTables: React.FC<StatsTablesProps> = ({ metrics }) => {
     const { attacking_creativity, defensive_contribution, physical_efficiency } = metrics;
@@ -30,7 +37,7 @@ const StatsTables: React.FC<StatsTablesProps> = ({ metrics }) => {
                             {Object.entries(attacking_creativity).map(([key, value]) => (
                                 <tr key={key}>
                                     <td>{formatLabel(key)}</td>
-                                    <td>{value}</td>
+                                    <td style={{ color: getRandomColor() }}>{value}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -52,7 +59,7 @@ const StatsTables: React.FC<StatsTablesProps> = ({ metrics }) => {
                             {Object.entries(defensive_contribution).map(([key, value]) => (
                                 <tr key={key}>
                                     <td>{formatLabel(key)}</td>
-                                    <td>{value}</td>
+                                    <td style={{ color: getRandomColor() }}>{value}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -74,7 +81,7 @@ const StatsTables: React.FC<StatsTablesProps> = ({ metrics }) => {
                             {physicalEntries.map(([key, value]) => (
                                 <tr key={key}>
                                     <td>{formatLabel(key)}</td>
-                                    <td>{value}</td>
+                                    <td style={{ color: getRandomColor() }}>{value}</td>
                                 </tr>
                             ))}
                         </tbody>

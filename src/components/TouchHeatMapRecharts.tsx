@@ -1,7 +1,7 @@
-// src/components/FootballHeatMapRecharts.tsx
+// src/components/TouchHeatMapRecharts.tsx
 import React from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Cell, Tooltip } from "recharts";
-import "./FootballHeatMapRecharts.scss";
+import "./TouchHeatMapRecharts.scss";
 import pitch from "../assets/football-pitch.svg";
 import { Player } from "../types/player";
 
@@ -11,7 +11,7 @@ interface Props {
     player: Player;
 }
 
-const FootballHeatMapRecharts: React.FC<Props> = ({ width = 800, height = 500, player }) => {
+const TouchHeatMapRecharts: React.FC<Props> = ({ width = 800, height = 500, player }) => {
     // now top-level, not buried in metrics
     const heatmapData = player.heatmap_points || [];
 
@@ -33,4 +33,4 @@ const FootballHeatMapRecharts: React.FC<Props> = ({ width = 800, height = 500, p
     );
 };
 
-export default FootballHeatMapRecharts;
+export default TouchHeatMapRecharts;

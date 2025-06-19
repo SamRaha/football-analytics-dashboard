@@ -1,3 +1,4 @@
+// src/pages/Player.scss
 @import "../styles/variables";
 
 .player-page {
@@ -5,6 +6,8 @@
     flex-direction: column;
     background: var(--bg-dark);
     color: var(--white);
+    padding: auto 24px;
+    height: 100%;
     flex: 1;
 
     .header {
@@ -16,12 +19,12 @@
         padding: 24px;
 
         .back-link {
-            margin: 0 auto;
             max-width: 1248px;
+            margin: 0 auto;
             padding: 0 24px;
             width: 100%;
-            text-align: left;
             display: flex;
+            text-align: left;
         }
 
         &:hover {
@@ -37,8 +40,8 @@
     .player-info {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 auto;
         max-width: 1248px;
+        margin: 0 auto;
 
         .col-image,
         .col-stats,
@@ -56,15 +59,16 @@
             text-align: center;
 
             .player-image {
-                border-radius: 50%;
-                height: 100px;
-                margin-bottom: 0.5rem;
-                object-fit: cover;
                 width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 0.5rem;
             }
 
             .player-name {
                 margin: 0;
+                color: var(--white);
             }
         }
 
@@ -72,66 +76,91 @@
             flex: 0.4;
             border-left: 1px solid var(--gray-light);
             border-right: 1px solid var(--gray-light);
+
+            p strong {
+                color: var(--white);
+            }
         }
 
         .col-contract {
             flex: 0.6;
+            p strong {
+                color: var(--white);
+            }
         }
 
         .col-scout {
             flex: 1;
             border-left: 1px solid var(--gray-light);
+
+            .player-summary p {
+                color: var(--white);
+            }
+            p strong {
+                color: var(--white);
+            }
         }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .col-image,
+            .col-stats,
+            .col-contract,
+            .col-scout {
+                flex: 1 1 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                margin: 0;
+                padding: 1rem;
+                border: none;
+            }
+
+            .col-image .player-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .col-stats {
+                width: 75%;
+                margin: 0 auto;
+                border-top: 1px solid var(--gray-light);
+            }
+
+            .col-contract {
+                width: 75%;
+                margin: 0 auto;
+                border-top: 1px solid var(--gray-light);
+                border-bottom: 1px solid var(--gray-light);
+            }
+            /* col-scout remains borderless */
+        }
+    }
+
+    .player-summary p {
+        color: var(--white);
     }
 
     .stats-container {
-        flex: 1;
-        margin-top: 16px;
-        padding: 0 24px;
+        flex: 1 1 auto;
         width: 100%;
-        overflow: auto;
+        padding: 0 24px;
+        margin-top: 16px;
         box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: auto;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 0;
     }
 
     .stats {
-        margin: 0 auto;
         max-width: 1248px;
-    }
-
-    @media (max-width: 768px) {
-        .player-info,
-        .col-image,
-        .col-stats,
-        .col-contract,
-        .col-scout {
-            align-items: center;
-            border: none;
-            display: flex;
-            flex: 1 1 100%;
-            flex-direction: column;
-            justify-content: center;
-            margin: 0;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .col-image .player-image {
-            height: 150px;
-            width: 150px;
-        }
-
-        .col-stats,
-        .col-contract {
-            margin: 0 auto;
-            width: 75%;
-        }
-
-        .col-stats {
-            border-top: 1px solid var(--gray-light);
-        }
-        .col-contract {
-            border-top: 1px solid var(--gray-light);
-            border-bottom: 1px solid var(--gray-light);
-        }
+        margin: 0 auto;
     }
 }
