@@ -55,7 +55,6 @@ $bg-dark: #343a40;
             padding-bottom: 1rem;
             display: flex;
             margin: 2rem 0;
-
             flex-direction: column;
         }
 
@@ -162,6 +161,7 @@ $bg-dark: #343a40;
         flex: 1 1 auto;
         width: 100%;
         padding: 0 24px;
+        margin-top: 16px;
         box-sizing: border-box;
         overflow-y: auto;
         overflow-x: auto;

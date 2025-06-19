@@ -17,7 +17,6 @@ const StatsTables: React.FC<StatsTablesProps> = ({ metrics }) => {
     return (
         <div className="row mt-4">
             {/* Attacking */}
-            <div className="spacer-lg"></div>
             <div className="col-12 col-md-4 mb-3">
                 <div className="table-responsive">
                     <table className="table table-dark table-striped">
