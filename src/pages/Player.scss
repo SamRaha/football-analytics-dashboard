@@ -1,43 +1,67 @@
+//player.scss
 $blue: #2138af;
 $white: #ffffff;
 $gray-light: #8d8d8d;
 $bg-dark: #343a40;
 
 .player-page {
+    display: flex;
+    flex-direction: column;
     background: $bg-dark;
     color: $white;
-    padding: 24px;
+    padding: auto 24px;
     height: 100%;
     flex: 1;
-    .back-link {
+
+    .header {
         color: $white;
         text-decoration: none;
-        font-weight: 500;
-        display: inline-block;
-        margin-bottom: 1rem;
+        font-weight: 700;
+        display: flex;
+        font-size: 20px;
+        background: $blue;
+        color: var(--yellow);
+        padding: 24px;
+
+        .back-link {
+            max-width: 1248px;
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+            text-align: left;
+            padding: 0 24px;
+        }
+
         &:hover {
             text-decoration: underline;
         }
     }
 
+    .player-info-background {
+        background: rgb(3, 21, 51);
+        width: 100%;
+    }
     .player-info {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
-        background: transparent;
+        max-width: 1248px;
+        margin: auto;
 
         .col-image,
         .col-stats,
         .col-contract,
         .col-scout {
-            padding: 1rem;
+            padding: 1.5rem 2rem;
+            padding-bottom: 1rem;
             display: flex;
+            margin: 2rem 0;
+
             flex-direction: column;
         }
 
         .col-image {
-            justify-content: center;
             align-items: center;
+            padding-top: 1rem !important;
             flex: 0 0 200px;
             text-align: center;
 
@@ -56,7 +80,7 @@ $bg-dark: #343a40;
         }
 
         .col-stats {
-            flex: 1;
+            flex: 0.4;
             border-left: 1px solid $gray-light;
             border-right: 1px solid $gray-light;
 
@@ -68,7 +92,7 @@ $bg-dark: #343a40;
         }
 
         .col-contract {
-            flex: 1;
+            flex: 0.6;
             p {
                 strong {
                     color: $white;
@@ -107,6 +131,7 @@ $bg-dark: #343a40;
                 justify-content: center;
                 text-align: center;
                 border: none;
+                margin: 0;
             }
 
             .col-image .player-image {
@@ -131,5 +156,22 @@ $bg-dark: #343a40;
         p {
             color: $white;
         }
+    }
+
+    .stats-container {
+        flex: 1 1 auto;
+        width: 100%;
+        padding: 0 24px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: auto;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 0;
+        // background: rgb(3, 21, 51);
+    }
+    .stats {
+        max-width: 1248px;
+        margin: auto;
     }
 }
