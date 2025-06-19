@@ -1,26 +1,27 @@
-$bg-dark: #343a40;
+@import "../styles/variables";
 
 #search {
-    background: $bg-dark;
-    height: 100%;
+    background: var(--bg-dark);
     flex: 1;
+
     .search-container {
-        padding: 24px 0 54px 0;
         background: var(--blue);
+        padding: 24px 0 54px;
 
         h2 {
             color: var(--yellow);
-            font-weight: 700;
             font-size: 26px;
+            font-weight: 700;
         }
     }
+
     .results-container {
-        background: $bg-dark;
-        margin-top: 40px !important;
+        background: var(--bg-dark);
+        margin-top: 40px;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .search-filters {
         flex-wrap: wrap;
     }

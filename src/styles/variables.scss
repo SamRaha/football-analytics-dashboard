@@ -1,0 +1,14 @@
+// variables.scss
+$yellow: #ffd600;
+$blue: #2138af;
+$white: #ffffff;
+$gray-light: #8d8d8d;
+$bg-dark: #343a40;
+
+:root {
+    --yellow: #{$yellow};
+    --blue: #{$blue};
+    --white: #{$white};
+    --gray-light: #{$gray-light};
+    --bg-dark: #{$bg-dark};
+}

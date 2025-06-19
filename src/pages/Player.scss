@@ -1,35 +1,27 @@
-//player.scss
-$blue: #2138af;
-$white: #ffffff;
-$gray-light: #8d8d8d;
-$bg-dark: #343a40;
+@import "../styles/variables";
 
 .player-page {
     display: flex;
     flex-direction: column;
-    background: $bg-dark;
-    color: $white;
-    padding: auto 24px;
-    height: 100%;
+    background: var(--bg-dark);
+    color: var(--white);
     flex: 1;
 
     .header {
-        color: $white;
-        text-decoration: none;
-        font-weight: 700;
+        background: var(--blue);
+        color: var(--yellow);
         display: flex;
         font-size: 20px;
-        background: $blue;
-        color: var(--yellow);
+        font-weight: 700;
         padding: 24px;
 
         .back-link {
-            max-width: 1248px;
-            display: flex;
             margin: 0 auto;
+            max-width: 1248px;
+            padding: 0 24px;
             width: 100%;
             text-align: left;
-            padding: 0 24px;
+            display: flex;
         }
 
         &:hover {
@@ -41,137 +33,105 @@ $bg-dark: #343a40;
         background: rgb(3, 21, 51);
         width: 100%;
     }
+
     .player-info {
         display: flex;
         flex-wrap: wrap;
+        margin: 0 auto;
         max-width: 1248px;
-        margin: auto;
 
         .col-image,
         .col-stats,
         .col-contract,
         .col-scout {
-            padding: 1.5rem 2rem;
-            padding-bottom: 1rem;
             display: flex;
-            margin: 2rem 0;
             flex-direction: column;
+            margin: 2rem 0;
+            padding: 1.5rem 2rem 1rem;
         }
 
         .col-image {
             align-items: center;
-            padding-top: 1rem !important;
             flex: 0 0 200px;
             text-align: center;
 
             .player-image {
-                width: 100px;
-                height: 100px;
                 border-radius: 50%;
-                object-fit: cover;
+                height: 100px;
                 margin-bottom: 0.5rem;
+                object-fit: cover;
+                width: 100px;
             }
 
             .player-name {
                 margin: 0;
-                color: $white;
             }
         }
 
         .col-stats {
             flex: 0.4;
-            border-left: 1px solid $gray-light;
-            border-right: 1px solid $gray-light;
-
-            p {
-                strong {
-                    color: $white;
-                }
-            }
+            border-left: 1px solid var(--gray-light);
+            border-right: 1px solid var(--gray-light);
         }
 
         .col-contract {
             flex: 0.6;
-            p {
-                strong {
-                    color: $white;
-                }
-            }
         }
 
         .col-scout {
             flex: 1;
-            border-left: 1px solid $gray-light;
-
-            .player-summary p {
-                color: $white;
-            }
-            p {
-                strong {
-                    color: $white;
-                }
-            }
-        }
-
-        @media (max-width: 768px) {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            .col-image,
-            .col-stats,
-            .col-contract,
-            .col-scout {
-                flex: 1 1 100%;
-                padding: 1rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                border: none;
-                margin: 0;
-            }
-
-            .col-image .player-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .col-stats {
-                width: 75%;
-                margin: 0 auto;
-                border-top: 1px solid $gray-light;
-            }
-            .col-contract {
-                width: 75%;
-                margin: 0 auto;
-                border-top: 1px solid $gray-light;
-                border-bottom: 1px solid $gray-light;
-            }
-        }
-    }
-    .player-summary {
-        p {
-            color: $white;
+            border-left: 1px solid var(--gray-light);
         }
     }
 
     .stats-container {
-        flex: 1 1 auto;
-        width: 100%;
-        padding: 0 24px;
+        flex: 1;
         margin-top: 16px;
+        padding: 0 24px;
+        width: 100%;
+        overflow: auto;
         box-sizing: border-box;
-        overflow-y: auto;
-        overflow-x: auto;
-        align-items: flex-start;
-        justify-content: center;
-        min-height: 0;
-        // background: rgb(3, 21, 51);
     }
+
     .stats {
+        margin: 0 auto;
         max-width: 1248px;
-        margin: auto;
+    }
+
+    @media (max-width: 768px) {
+        .player-info,
+        .col-image,
+        .col-stats,
+        .col-contract,
+        .col-scout {
+            align-items: center;
+            border: none;
+            display: flex;
+            flex: 1 1 100%;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .col-image .player-image {
+            height: 150px;
+            width: 150px;
+        }
+
+        .col-stats,
+        .col-contract {
+            margin: 0 auto;
+            width: 75%;
+        }
+
+        .col-stats {
+            border-top: 1px solid var(--gray-light);
+        }
+        .col-contract {
+            border-top: 1px solid var(--gray-light);
+            border-bottom: 1px solid var(--gray-light);
+        }
     }
 }
