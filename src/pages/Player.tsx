@@ -8,6 +8,7 @@ import StatsTables from "../components/StatTables";
 import GradientHeatMap from "../components/GradientHeatMap";
 import TouchHeatMapRecharts from "../components/TouchHeatMapRecharts";
 import { getPlayersWithHeat } from "../utils/augmentPlayersWithHeat";
+import StatsBarChart from "../components/StatsBarChart";
 
 function useWindowWidth() {
     const [width, setWidth] = useState(window.innerWidth);
@@ -93,16 +94,20 @@ const Player: React.FC = () => {
             <div className="stats-container">
                 <div className="stats">
                     <StatsTables metrics={player.metrics} />
+                    <div className="graphs d-flex flex-wrap">
+                        <div className="heatmaps">
+                            <div className="gradient-container">
+                                <h5>Pitch Thirds Occupancy (Gradient)</h5>
+                                <GradientHeatMap width={mapWidth} height={mapHeight} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
+                            </div>
 
-                    <div className="heatmaps">
-                        <div className="gradient-container">
-                            <h5>Pitch Thirds Occupancy (Gradient)</h5>
-                            <GradientHeatMap width={mapWidth} height={mapHeight} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
+                            <div className="touch-container">
+                                <h5>Touch Intensity Heat Map</h5>
+                                <TouchHeatMapRecharts width={mapWidth} height={mapHeight} player={player} />
+                            </div>
                         </div>
-
-                        <div className="touch-container">
-                            <h5>Touch Intensity Heat Map</h5>
-                            <TouchHeatMapRecharts width={mapWidth} height={mapHeight} player={player} />
+                        <div className="barchart-container">
+                            <StatsBarChart player={player} />
                         </div>
                     </div>
                 </div>

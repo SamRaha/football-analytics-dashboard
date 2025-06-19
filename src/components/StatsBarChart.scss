@@ -1,0 +1,16 @@
+// src/components/StatsBarChart.scss
+@import "../styles/variables";
+
+.stats-barchart {
+    width: 100%;
+    max-width: 400px;
+    .chart-select {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    .bar-chart-label {
+        height: 50px;
+    }
+}
