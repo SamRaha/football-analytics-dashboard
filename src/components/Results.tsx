@@ -16,7 +16,7 @@ const Results: React.FC<ResultsProps> = ({ players, isLoading, hasNoMatches }) =
     if (isLoading)
         return (
             <div className="content d-flex justify-content-center align-items-center m-4">
-                <Spinner animation="border" />
+                <Spinner variant="white" animation="border" />
             </div>
         );
 
@@ -24,7 +24,7 @@ const Results: React.FC<ResultsProps> = ({ players, isLoading, hasNoMatches }) =
 
     return (
         <div className="content my-4">
-            <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive className="table-dark">
                 <thead>
                     <tr>
                         <th>Name</th>

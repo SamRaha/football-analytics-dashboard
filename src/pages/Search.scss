@@ -1,11 +1,21 @@
-.search-container {
-    padding: 24px 0 54px 0;
-    background: var(--blue);
+$bg-dark: #343a40;
 
-    h2 {
-        color: var(--yellow);
-        font-weight: 700;
-        font-size: 26px;
+#search {
+    background: $bg-dark;
+    height: 100%;
+    flex: 1;
+    .search-container {
+        padding: 24px 0 54px 0;
+        background: var(--blue);
+
+        h2 {
+            color: var(--yellow);
+            font-weight: 700;
+            font-size: 26px;
+        }
+    }
+    .results-container {
+        background: $bg-dark;
     }
 }
 

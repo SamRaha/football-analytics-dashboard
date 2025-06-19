@@ -7,13 +7,14 @@ $bg-dark: #343a40;
     background: $bg-dark;
     color: $white;
     padding: 24px;
+    height: 100%;
+    flex: 1;
     .back-link {
         color: $white;
         text-decoration: none;
         font-weight: 500;
         display: inline-block;
         margin-bottom: 1rem;
-
         &:hover {
             text-decoration: underline;
         }
