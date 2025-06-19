@@ -1,7 +1,7 @@
-// src/components/FootballHeatMap.tsx
+// src/components/GradientHeatMap.tsx
 import React from "react";
 import { HeatmapThirdPercentages } from "../types/player";
-import "./FootballHeatMap.scss";
+import "./GradientHeatMap.scss";
 
 interface Props {
     width?: number;
@@ -9,7 +9,7 @@ interface Props {
     heatmapThirdPercentages: HeatmapThirdPercentages;
 }
 
-const FootballHeatMap: React.FC<Props> = ({ width = 600, height = 400, heatmapThirdPercentages: { defensive_third, middle_third, attacking_third } }) => {
+const GradientHeatMap: React.FC<Props> = ({ width = 600, height = 400, heatmapThirdPercentages: { defensive_third, middle_third, attacking_third } }) => {
     // convert to 0–1
     const def = defensive_third / 100;
     const mid = middle_third / 100;
@@ -39,4 +39,4 @@ const FootballHeatMap: React.FC<Props> = ({ width = 600, height = 400, heatmapTh
     );
 };
 
-export default FootballHeatMap;
+export default GradientHeatMap;

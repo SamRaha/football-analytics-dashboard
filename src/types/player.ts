@@ -5,6 +5,11 @@ export interface HeatmapThirdPercentages {
     middle_third: number;
     attacking_third: number;
 }
+export interface HeatmapPoint {
+    x: number; // 0–100% across pitch
+    y: number; // 0–100% down pitch
+    value: number; // 0–1 intensity
+}
 
 export interface AttackingCreativityMetrics {
     goals_per_90: number;
@@ -54,6 +59,7 @@ export interface Player {
     scout_summary: string;
     metrics: PlayerMetrics;
     img: string;
+    heatmap_points?: HeatmapPoint[];
 }
 
 export type Players = Player[];

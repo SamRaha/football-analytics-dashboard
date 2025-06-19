@@ -1,18 +1,28 @@
+// src/pages/Player.tsx
 import React, { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Player } from "../types/player";
 import "./Player.scss";
 import StatsTables from "../components/StatTables";
-import FootballHeatMap from "../components/FootballHeatMap";
+import GradientHeatMap from "../components/GradientHeatMap";
+import FootballHeatMapRecharts from "../components/FootballHeatMapRecharts";
+import { getPlayersWithHeat } from "../utils/augmentPlayersWithHeat";
 
 const Player: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-
     const qc = useQueryClient();
-    const all = qc.getQueryData<Player[]>(["players"]) ?? [];
+
+    // 1. fetch raw players
+    const raw = qc.getQueryData<Player[]>(["players"]) ?? [];
+
+    // 2. augment with heatmap_points
+    const all = getPlayersWithHeat(raw, /*pointCount=*/ 200);
+
+    // 3. find the one we want
     const player = all.find((p) => p.player_id === id);
+    console.log("player: ", player);
 
     useEffect(() => {
         if (!player) navigate("/", { replace: true });
@@ -25,6 +35,7 @@ const Player: React.FC = () => {
             <Link to="/" className="header">
                 <div className="back-link">← Back to search</div>
             </Link>
+
             <div>
                 <div className="player-info-background">
                     <div className="player-info">
@@ -56,7 +67,6 @@ const Player: React.FC = () => {
                         <div className="col-scout">
                             <div className="player-summary">
                                 <strong>Scout Summary</strong>
-
                                 <div className="mb-1" />
                                 <p>{player.scout_summary}</p>
                             </div>
@@ -64,11 +74,15 @@ const Player: React.FC = () => {
                     </div>
                 </div>
             </div>
+
             <div className="stats-container">
                 <div className="stats">
                     <StatsTables metrics={player.metrics} />
 
-                    <FootballHeatMap width={800} height={500} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
+                    <GradientHeatMap width={800} height={500} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
+
+                    {/* now pass the player */}
+                    <FootballHeatMapRecharts width={800} height={500} player={player} />
                 </div>
             </div>
         </div>
