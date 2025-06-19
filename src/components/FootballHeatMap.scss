@@ -1,0 +1,17 @@
+/* src/components/FootballHeatMap.scss */
+.heatmap-container {
+    position: relative;
+    background-image: url("../assets/football-pitch.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+
+.heatmap-overlay {
+    position: absolute;
+    top: 26px;
+    right: 10px;
+    bottom: 24px;
+    left: 10px;
+    pointer-events: none;
+}

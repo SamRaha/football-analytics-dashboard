@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { Player } from "../types/player";
 import "./Player.scss";
 import StatsTables from "../components/StatTables";
+import FootballHeatMap from "../components/FootballHeatMap";
 
 const Player: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -66,6 +67,8 @@ const Player: React.FC = () => {
             <div className="stats-container">
                 <div className="stats">
                     <StatsTables metrics={player.metrics} />
+
+                    <FootballHeatMap width={800} height={500} heatmapThirdPercentages={player.metrics.physical_efficiency.heatmap_third_percentages} />
                 </div>
             </div>
         </div>
